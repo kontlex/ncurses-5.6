@@ -1,9 +1,9 @@
 #!/bin/sh
 
-mkdir ./installed
+mkdir $(pwd)/installed
 
 PATH="${TC_TOOLCHAIN_PATH}:${PATH}"
-CC=${TC_TOOLCHAIN_TRIPLET}-gcc  ./configure ${TC_TOOLCHAIN_TRIPLET} --host=x86_64-gnu-linux --target=${TC_TOOLCHAIN_TRIPLET} --with-shared --prefix=./installed
+CC=${TC_TOOLCHAIN_TRIPLET}-gcc  ./configure ${TC_TOOLCHAIN_TRIPLET} --host=x86_64-gnu-linux --target=${TC_TOOLCHAIN_TRIPLET} --with-shared --prefix=$(pwd)/installed
 
 make HOSTCC=gcc CXX=${TC_TOOLCHAIN_TRIPLET}-c++
 
