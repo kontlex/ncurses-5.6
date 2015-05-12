@@ -1,16 +1,20 @@
 #!/bin/sh
 
 root_dir=$(pwd)
-mkdir ${root_dir}/ncurses_bin
-mkdir ${root_dir}/build
+src_dir=${root_dir}/nc_src
+build_dir=${root_dir}/build
+install_dir=${root_dir}/ncurses_bin
+
+mkdir ${install_dir}
+mkdir ${build_dir}
 
 cd ${root_dir}/build
 
 PATH="${TC_TOOLCHAIN_PATH}:${PATH}"
-CC=${TC_TOOLCHAIN_TRIPLET}-gcc  ${root_dir}/src/configure ${TC_TOOLCHAIN_TRIPLET} --host=x86_64-gnu-linux --target=${TC_TOOLCHAIN_TRIPLET} --with-shared --prefix=${root_dir}/ncurses_bin
+CC=${TC_TOOLCHAIN_TRIPLET}-gcc  ${src_dir}/configure ${TC_TOOLCHAIN_TRIPLET} --host=x86_64-gnu-linux --target=${TC_TOOLCHAIN_TRIPLET} --with-shared --prefix=${install_dir}
 
 make HOSTCC=gcc CXX=${TC_TOOLCHAIN_TRIPLET}-c++
 
 make install
 
-rm -rf ${root_dir}/build
+rm -rf ${build_dir}
