@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. ./tc_parameters.sh
+
 root_dir=$(pwd)
 src_dir=${root_dir}/nc_src
 build_dir=${root_dir}/build
@@ -10,7 +12,6 @@ mkdir ${build_dir}
 
 cd ${root_dir}/build
 
-PATH="${TC_TOOLCHAIN_PATH}:${PATH}"
 CC=${TC_TOOLCHAIN_TRIPLET}-gcc  ${src_dir}/configure ${TC_TOOLCHAIN_TRIPLET} --host=x86_64-gnu-linux --target=${TC_TOOLCHAIN_TRIPLET} --with-shared --prefix=${install_dir}
 
 make HOSTCC=gcc CXX=${TC_TOOLCHAIN_TRIPLET}-c++
@@ -18,3 +19,4 @@ make HOSTCC=gcc CXX=${TC_TOOLCHAIN_TRIPLET}-c++
 make install
 
 rm -rf ${build_dir}
+
